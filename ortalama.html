@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ders Ortalaması Hesaplama</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .form-container {
+      margin-top: 50px;
+    }
+    input {
+      margin: 10px;
+      padding: 10px;
+      width: 300px;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Ders Ortalaması Hesaplama</h2>
+  <div class="form-container">
+    <form id="ortalamaForm">
+      <!-- Türk Dili -->
+      <h3>Türk Dili</h3>
+      <input type="number" id="vizeTurk" placeholder="Vize (0-40)" min="0" max="40"><br>
+      <input type="number" id="finalTurk" placeholder="Final (0-60)" min="0" max="60"><br>
+
+      <!-- Matematik -->
+      <h3>Matematik</h3>
+      <input type="number" id="vizeMat" placeholder="Vize (0-30)" min="0" max="30"><br>
+      <input type="number" id="odevMat" placeholder="Ödev (0-30)" min="0" max="30"><br>
+      <input type="number" id="finalMat" placeholder="Final (0-40)" min="0" max="40"><br>
+
+      <!-- Fizik -->
+      <h3>Fizik</h3>
+      <input type="number" id="kucukSinavFizik" placeholder="Küçük Sınav (0-10)" min="0" max="10"><br>
+      <input type="number" id="vizeFizik" placeholder="Vize (0-30)" min="0" max="30"><br>
+      <input type="number" id="finalFizik" placeholder="Final (0-40)" min="0" max="40"><br>
+      <input type="number" id="laboratuvarFizik" placeholder="Laboratuvar (0-20)" min="0" max="20"><br>
+
+      <!-- Yazılım Mühendisliğine Giriş -->
+      <h3>Yazılım Mühendisliğine Giriş</h3>
+      <input type="number" id="devamYazilim" placeholder="Devam (0-12)" min="0" max="12"><br>
+      <input type="number" id="odevYazilim" placeholder="Ödev (0-18)" min="0" max="18"><br>
+      <input type="number" id="vizeYazilim" placeholder="Vize (0-10)" min="0" max="10"><br>
+      <input type="number" id="finalYazilim" placeholder="Final (0-40)" min="0" max="40"><br>
+      <input type="number" id="projeYazilim" placeholder="Proje (0-20)" min="0" max="20"><br>
+
+      <!-- Inkılap -->
+      <h3>İnkılap</h3>
+      <input type="number" id="vizeInkilap" placeholder="Vize (0-40)" min="0" max="40"><br>
+      <input type="number" id="finalInkilap" placeholder="Final (0-60)" min="0" max="60"><br>
+
+      <button type="button" onclick="ortalamaHesapla()">Hesapla</button>
+    </form>
+
+    <div class="result" id="sonuc"></div>
+  </div>
+
+  <script>
+    function ortalamaHesapla() {
+      // Türk Dili Ortalaması
+      var vizeTurk = parseFloat(document.getElementById("vizeTurk").value);
+      var finalTurk = parseFloat(document.getElementById("finalTurk").value);
+      var ortalamaTurk = (vizeTurk * 0.4) + (finalTurk * 0.6);
+      
+      // Matematik Ortalaması
+      var vizeMat = parseFloat(document.getElementById("vizeMat").value);
+      var odevMat = parseFloat(document.getElementById("odevMat").value);
+      var finalMat = parseFloat(document.getElementById("finalMat").value);
+      var ortalamaMat = (vizeMat * 0.3) + (odevMat * 0.3) + (finalMat * 0.4);
+      
+      // Fizik Ortalaması
+      var kucukSinavFizik = parseFloat(document.getElementById("kucukSinavFizik").value);
+      var vizeFizik = parseFloat(document.getElementById("vizeFizik").value);
+      var finalFizik = parseFloat(document.getElementById("finalFizik").value);
+      var laboratuvarFizik = parseFloat(document.getElementById("laboratuvarFizik").value);
+      var ortalamaFizik = (kucukSinavFizik * 0.1) + (vizeFizik * 0.3) + (finalFizik * 0.4) + (laboratuvarFizik * 0.2);
+      
+      // Yazılım Mühendisliğine Giriş Ortalaması
+      var devamYazilim = parseFloat(document.getElementById("devamYazilim").value);
+      var odevYazilim = parseFloat(document.getElementById("odevYazilim").value);
+      var vizeYazilim = parseFloat(document.getElementById("vizeYazilim").value);
+      var finalYazilim = parseFloat(document.getElementById("finalYazilim").value);
+      var projeYazilim = parseFloat(document.getElementById("projeYazilim").value);
+      var ortalamaYazilim = (devamYazilim * 0.12) + (odevYazilim * 0.18) + (vizeYazilim * 0.1) + (finalYazilim * 0.4) + (projeYazilim * 0.2);
+      
+      // İnkılap Ortalaması
+      var vizeInkilap = parseFloat(document.getElementById("vizeInkilap").value);
+      var finalInkilap = parseFloat(document.getElementById("finalInkilap").value);
+      var ortalamaInkilap = (vizeInkilap * 0.4) + (finalInkilap * 0.6);
+
+      // AKTS
+      var aktsTurk = 2, aktsMat = 4, aktsFizik = 4, aktsYazilim = 3, aktsInkilap = 2;
+
+      // Genel Ortalama
+      var toplamNot = (ortalamaTurk * aktsTurk) + (ortalamaMat * aktsMat) + (ortalamaFizik * aktsFizik) + (ortalamaYazilim * aktsYazilim) + (ortalamaInkilap * aktsInkilap);
+      var toplamAkts = aktsTurk + aktsMat + aktsFizik + aktsYazilim + aktsInkilap;
+      var genelOrtalama = toplamNot / toplamAkts;
+
+      // Sonuçları göster
+      document.getElementById("sonuc").innerHTML = `
+        <p>Türk Dili Ortalaması: ${ortalamaTurk.toFixed(2)}</p>
+        <p>Matematik Ortalaması: ${ortalamaMat.toFixed(2)}</p>
+        <p>Fizik Ortalaması: ${ortalamaFizik.toFixed(2)}</p>
+        <p>Yazılım Mühendisliğine Giriş Ortalaması: ${ortalamaYazilim.toFixed(2)}</p>
+        <p>İnkılap Ortalaması: ${ortalamaInkilap.toFixed(2)}</p>
+        <p><strong>Genel Ortalama: ${genelOrtalama.toFixed(2)}</strong></p>
+      `;
+    }
+  </script>
+</body>
+</html>
